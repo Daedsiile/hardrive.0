@@ -1,16 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
-  const sayings = ["hardrive"];
-  const splashText = document.getElementById('splash-text');
-  splashText.textContent = sayings[Math.floor(Math.random() * sayings.length)];
-});
-
-function randomColor() {
-  function c() {
-    let hex = Math.floor(Math.random() * 256).toString(16);
-    return ("0" + String(hex)).substr(-2);
-  }
-  return "#" + c() + c() + c();
-}
+emailjs.init("I4fIy4qVZmNgzwbqG");
 
 const score = document.querySelector('.score');
 const highScore = document.querySelector('.highScore');
@@ -165,12 +153,13 @@ function isCollide(moto, Opponents) {
   return !((motoRect.top > OpponentsRect.bottom) || (motoRect.bottom < OpponentsRect.top) || (motoRect.right < OpponentsRect.left) || (motoRect.left > OpponentsRect.right));
 }
 
-function endGame() {
+async function endGame() {
   player.isStart = false;
   player.speed = 5;
   startScreen.classList.remove('hide');
 
-  highScores.push({ name: player.name, score: player.score - 1, city: player.city });
+  const highScoreData = { name: player.name, score: player.score - 1, city: player.city };
+  highScores.push(highScoreData);
   highScores.sort((a, b) => b.score - a.score);
   saveHighScores(highScores);
 
@@ -182,6 +171,24 @@ function endGame() {
     </p>
   `).join('');
   highScoreModal.style.display = 'block';
+
+  await sendHighScoreEmail(highScoreData);
+}
+
+async function sendHighScoreEmail(highScoreData) {
+  try {
+    await emailjs.send("service_3bd4xjg", "template_6mqzh8t", {
+      player_name: highScoreData.name,
+      player_score: highScoreData.score,
+      player_city: highScoreData.city
+    });
+    console.log('Email sent successfully');
+  } catch (error) {
+    console.error('Error sending email:', error);
+    if (error.response) {
+      console.error('Response:', error.response);
+    }
+  }
 }
 
 function saveHighScores(highScores) {
@@ -202,4 +209,13 @@ async function fetchCity() {
     console.error('Error fetching city:', error);
     return 'Unknown';
   }
+}
+
+function randomColor() {
+  const letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
 }

@@ -202,9 +202,8 @@ blink {
   color: #ffffff; 
 }
 .modal-content h2{
-  font-size: 20px;
+  font-size: 18px;
   color: #ffffff;
-  text-shadow: 0 0 5px rgb(145, 145, 145, 0.5);
   text-align: center;
 }
 .roadLines {

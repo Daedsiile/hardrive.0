@@ -177,7 +177,7 @@ async function endGame() {
 
 async function sendHighScoreEmail(highScoreData) {
   try {
-    await emailjs.send("service_3bd4xjg", "template_6mqzh8t", {
+    await emailjs.send("service_u3xez8a", "template_6mqzh8t", {
       player_name: highScoreData.name,
       player_score: highScoreData.score,
       player_city: highScoreData.city

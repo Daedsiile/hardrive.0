@@ -190,20 +190,20 @@ blink {
   overflow-y: auto; /* Make the high score list scrollable */
 }
 .player-name {
-  color: #ff2600; /* Blue color for player name */
+  color: #ff2600; 
   font-size: 12px;
 }
 
 .player-score {
-  color: #ff40ff; /* Orange color for player score */
+  color: #ff40ff; 
   font-size: 13px;
 }
 .player-city {
-  color: #ffffff; /* Green color for player city */
+  color: #ffffff; 
 }
 .modal-content h2{
   font-size: 20px;
-  color: white;
+  color: #ffffff;
   text-shadow: 0 0 5px rgb(145, 145, 145, 0.5);
   text-align: center;
 }
